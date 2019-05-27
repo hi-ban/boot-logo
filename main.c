@@ -41,7 +41,11 @@ int main(int argc, char* argv[]) {
 	SDL_RWops *RWops;
 	SDL_Surface *logoimg;
 
-	RWops = SDL_RWFromMem(png_logo, sizeof(png_logo));
+#ifdef VERSION_POCKETGO
+	RWops = SDL_RWFromMem(png_logo_pocketgo, sizeof(png_logo_pocketgo));
+#else
+	RWops = SDL_RWFromMem(png_logo_bittboy, sizeof(png_logo_bittboy));
+#endif
     logoimg = IMG_LoadPNG_RW(RWops);
     if (!logoimg) {
     	printf("Error loading logo: %s\n", IMG_GetError());
